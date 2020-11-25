@@ -92,7 +92,6 @@ def predict(img):
     return (number, prob, pred)
 
 #%%
-from matplotlib import pyplot as plt
 def crop_and_predict(img_path):
     img = cv2.imread(img_path, 0)
     img = 255 - cv2.resize(img, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)    
