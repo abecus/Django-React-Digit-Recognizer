@@ -1,0 +1,10 @@
+.App {
+  /* display: flex; */
+  /* justify-content: center; */
+  text-align: center;
+}
+
+#c{
+  margin-top: 10rem;
+  border: 5px solid gray;
+}
