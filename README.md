@@ -2,6 +2,10 @@
 
 A CNN based digit recognizer which takes input as canvas drawing using React and process it on server-side using Django Rest-Framework
 
+A snapshot of app:
+
+![screen-shot](./snip.PNG)
+
 ### `npm start`
 
 Runs the app in the development mode.\

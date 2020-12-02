@@ -52,6 +52,10 @@ function draw(el) {
 
 export function Canvas() {
   const [_canvas, setCanvas] = useState(null);
+  const [pred, setPred] = useState({
+    Number: "",
+    probability: "",
+  });
   const url = "http://127.0.0.1:8000/api/recognize/";
 
   useEffect(() => {
@@ -80,7 +84,7 @@ export function Canvas() {
     const csrf_token = getCookie("csrftoken");
     const dataURL = _canvas.toDataURL();
 
-    const response = await fetch(url, {
+    const data = await fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -90,8 +94,15 @@ export function Canvas() {
       body: JSON.stringify({
         data: dataURL,
       }),
-    });
-    const data = await response.json();
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .catch(function (err) {
+        console.warn("Could not find the data");
+      });
+    if (!data) return;
+    setPred(() => data);
     console.log(data);
     return data;
   };
@@ -103,6 +114,12 @@ export function Canvas() {
       <button className="submit" onClick={handleClick}>
         Submit
       </button>
+      <h1>{pred.Number}</h1>
+      <h3>
+        {pred.probability !== ""
+          ? `With probability: ${pred.probability.toFixed(3)}`
+          : "_____________________________"}
+      </h3>
     </>
   );
 }
